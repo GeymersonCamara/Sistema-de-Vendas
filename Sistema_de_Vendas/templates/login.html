@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+    </style>
+    <style type="text/css">
+        /* Reset básico */
+        html, body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+
+        .head {
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: space-around; /* Espaça elementos principais */
+            background-color: #00336a;
+            padding: 0 3rem; /* Espaçamento interno */
+            height: 100px; /* Altura do cabeçalho */
+        }
+
+        .head-container {
+            display: flex;
+            justify-content: space-evenly; /* Centraliza horizontalmente o menu */
+            align-items: center; /* Centraliza verticalmente */
+            flex: 1; /* Permite que o menu ocupe o espaço necessário */
+        }
+
+        nav ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        h1 {
+            color: white;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 1.8rem; /* Ajuste do tamanho da fonte */
+            margin: 0; /* Remove o espaçamento padrão do <h1> */
+        }
+
+        .menu {
+            padding: 0 1rem; /* Espaçamento lateral */
+            color: white;
+            font-size: 1.2rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 2rem;
+        }
+
+        .login {
+            width: 550px;
+            height: 700px;
+            background: white;
+            align-items: center;
+            margin: 5rem auto;
+            border-radius: 1.7rem;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .h1 {
+            color: #00336a;
+            font-family: 'Titillium Web', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            padding: 5rem 0 0 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column; /* Alinha os itens verticalmente */
+            align-items: center;    /* Centraliza o botão e os campos horizontalmente */
+        }
+
+        .nome {
+            display: flex;
+            align-items: center;
+            margin: 6rem auto 0;
+            padding: 1rem 1.5rem;
+            border-color: #00336a;
+            border-radius: 1.5rem;
+            font-size: 1.6rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .senha {
+            display: flex;
+            align-items: center;
+            margin: 2rem auto 0;
+            padding: 1rem 1.5rem;
+            border-color: #00336a;
+            border-radius: 1.5rem;
+            font-size: 1.6rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .entrar {
+            margin-top: 2rem;      /* Espaçamento acima do botão */
+            background-color: #00336a;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.3rem 2rem;    /* Adiciona espaço interno */
+            cursor: pointer;
+            color: white;
+            font-size: 1.6rem;
+            font-family: 'Titillium Web', sans-serif;
+            text-align: center;
+        }
+
+        .entrar a {
+            text-decoration: none; /* Remove sublinhado */
+            color: white;          /* Garante que o texto do link seja branco */
+        }
+
+        .notificacao {
+            font-family: 'Titillium Web', sans-serif;
+            color: red;
+            text-align: center;
+            display: flex; /* Utiliza Flexbox */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            margin-top: 1rem; /* Espaçamento superior */
+            height: 2rem; /* Altura fixa para consistência */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="head">
+        <a href="{% url 'agenda' %}">Sistema</a>
+        <div class="head-container">
+            <nav>
+                <ul>
+                    <li class="menu">Soluções</li>
+                    <li class="menu">Segmentos</li>
+                    <li class="menu">Parceiro</li>
+                    <li class="menu">Sobre</li>
+                    <li class="menu">Seja uma Revenda!</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div>
+        <nav class="login">
+            <h1 class="h1"> Login </h1>
+            <form method="POST" action="{% url 'submit_login' %}">{% csrf_token %}
+                <input type="text" class="nome" name="username" placeholder="username">
+                <input type="password" class="senha" name="password" placeholder="password">
+                <button class="entrar" type="submit">Login</button>
+            </form>
+            {% for message in messages %}
+            <div class="notificacao">
+                <strong >Erro: </strong> {{ message }}
+            </div>
+            {% endfor %}
+        </nav>
+    </div>
+</body>
+</html>

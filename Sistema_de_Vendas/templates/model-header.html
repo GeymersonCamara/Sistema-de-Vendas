@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+        </style>
+    <style type="text/css">
+        /* Reset básico */
+        html, body {
+            font-family: 'Titillium Web', sans-serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+
+        nav {
+            background-color: #00336a;
+            height: 100px;
+            display: flex;
+            justify-content: space-evenly; /* Espaçamento igual */
+            align-items: center;           /* Centraliza verticalmente */
+            padding: 0 2rem;               /* Espaçamento interno horizontal */
+        }
+
+        nav ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .menu {
+            padding: 0 1rem; /* Espaçamento lateral */
+            color: white;
+            font-size: 1.2rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .button {
+            padding: 10px 20px;
+            width: 6rem;
+            height: 2.6rem;
+            background-color: #18ada1;
+            color: white;
+            border: 2px solid transparent; /* Inicialmente, sem borda */
+            border-radius: 5px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: border 0.3s ease; /* Suaviza a transição da borda */
+            
+            /* Centraliza o texto dentro do botão */
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center;     /* Centraliza verticalmente */
+        }
+
+        .button:hover {
+            border-color: white; /* Cor da borda quando passar o mouse */
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .icon {
+            width: 6rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="head">
+        <nav>
+            <img src="{% static 'img/icon.png' %}" alt="" class="icon">
+            <ul>
+                <li class="menu"><a href="">Soluções</a></li>
+                <li class="menu"><a href="">Segmentos</a></li>
+                <li class="menu"><a href="">Parceiro</a></li>
+                <li class="menu"><a href="">Sobre</a></li>
+                <li class="menu"><a href="">Seja uma Revenda!</a></li>
+            </ul>
+            <button class="button"><a href="{% url 'login' %}">Login</a></button>
+        </nav>
+    </div>
+</body>
+</html>

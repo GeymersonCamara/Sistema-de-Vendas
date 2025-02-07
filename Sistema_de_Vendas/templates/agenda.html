@@ -1,0 +1,83 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+{% load static %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+</style>
+
+<style>
+    html {
+        padding: 0;
+        margin: 0;
+    }
+
+    .titulo {
+        text-align: center;
+        font-family: 'Titillium Web', sans-serif;
+        color: #00336a;
+    }
+
+    .mercado {
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+    }
+
+    .categoria {
+        background: white;
+        width: 12rem;
+        height: 18rem;
+        display: flex; /* Ativa o Flexbox */
+        flex-direction: column;
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: flex-start; /* Alinha ao topo */
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+        padding: 1rem;
+        border: 2px solid transparent; /* Define borda inicialmente invisível */
+        transition: border 0.3s ease; /* Adiciona animação à borda */
+    }
+
+    .categoria img {
+        width: 100%;
+        margin: 0 0 2rem 0;
+        padding: 0;
+    }
+
+    b {
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 2rem;
+        color: #00336a;
+        text-align: center; /* Centraliza o texto */
+        margin: 0 auto;
+        align-items: center;
+    }
+
+    .button2 {
+        border: none;
+        cursor: pointer;
+        background: none;
+    }
+
+    .categoria:hover {
+        border-color: #00336a; /* Cor da borda ao passar o mouse */
+    }
+
+</style>
+
+<body>
+    <h1 class="titulo">Principais Segmentos</h1>
+    <div class="mercado">
+        <button type="submit" class="button2">
+            <a href="{% url 'mercado' %}">
+                <nav class="categoria">
+                    <img src="{% static 'img/shopping-cart_1558123.png' %}" alt="Shopping Cart" class="car">
+                    <b>Mercado</b>
+                </nav>
+            </a>
+        </button>
+    </div>
+</body>
+{% endblock %}
