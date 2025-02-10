@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Evento
+from core.models import Evento, Cliente
 
 # Register your models here.
 
@@ -8,3 +8,8 @@ class EventoAdmin(admin.ModelAdmin):
     list_filter = ('titulo',)
 
 admin.site.register(Evento, EventoAdmin)
+
+@admin.register(Cliente)
+class ClienteAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'email', 'telefone')  # Mostra essas colunas no admin
+    search_fields = ('nome', 'email')

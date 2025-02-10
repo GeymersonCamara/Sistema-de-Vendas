@@ -105,6 +105,7 @@
             font-size: 2rem;
             align-items: center;
             text-align: center;
+            margin: 0;
         }
 
         .aba {
@@ -141,6 +142,115 @@
             margin-bottom: 20px; /* Espaço entre os botões e o conteúdo */
         }
 
+        .cliente-lista {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cliente-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .cliente-item:last-child {
+            border-bottom: none;
+        }
+
+        .cliente-nome {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cliente-detalhes {
+            color: #555;
+            font-size: 14px;
+        }
+
+        #cpf{
+            margin: 0;
+        }
+
+        .cpf{
+            margin: 1%;
+        }
+
+        #nome{
+            margin: 0;
+        }
+
+        .dados{
+            display: flex;
+            gap: 3%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bnt-cadastrar{
+            text-align: center;
+            background-color: #00336a;
+            width: 20%;
+            padding: 1% 0;
+            border-radius: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .form-container {
+            width: 90%; /* Ocupar quase todo o espaço da section */
+            max-width: none; /* Remover a limitação de largura */
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Organizar os campos em duas colunas */
+        .form-style {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas de igual tamanho */
+            gap: 20px;
+        }
+
+        /* Garantir que botões e inputs menores ocupem a linha inteira */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00336a;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #00336a;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            grid-column: span 2; /* Ocupar duas colunas */
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+
     </style>
 </head>
 <body>
@@ -171,23 +281,79 @@
         </div>
         <div class="container-conteudo">
             <div id="aba1" class="aba">
-                <p>Conteúdo da Aba 1. dsfasfddfaksljddhhflksdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjfffffffffffffffffffffffffffffffffffffffffff
-                    fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</p>
+                <input type="text" id="search" placeholder="Buscar cliente..." oninput="filtrarClientes()" style="width: 70%; padding: 10px; margin-bottom: 10px;">
+                <div class="cliente-lista">
+                    {% for cliente in clientes %}
+                        <div class="cliente-item">
+                            <div class="cliente-nome">{{ cliente.nome }}</div>
+                            <div class="cliente-detalhes">
+                                Email: {{ cliente.email }}<br>
+                                Telefone: {{ cliente.telefone }}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Nenhum cliente cadastrado.</p>
+                    {% endfor %}
+                  </div>
             </div>
             <div id="aba2" class="aba">
-                <p>Conteúdo da Aba 2.</p>
+                <div class="form-container">
+                    <form method="POST" class="form-style">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="{{ form.cpf.id_for_label }}">CPF:</label>
+                            {{ form.cpf }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.nome.id_for_label }}">Nome:</label>
+                            {{ form.nome }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.telefone.id_for_label }}">Telefone:</label>
+                            {{ form.telefone }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">E-mail:</label>
+                            {{ form.email }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.cep.id_for_label }}">CEP:</label>
+                            {{ form.cep }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.logradouro.id_for_label }}">Logradouro:</label>
+                            {{ form.logradouro }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.cidade.id_for_label }}">Cidade:</label>
+                            {{ form.cidade }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.numero.id_for_label }}">Número:</label>
+                            {{ form.numero }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.bairro.id_for_label }}">Bairro:</label>
+                            {{ form.bairro }}
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="{{ form.uf.id_for_label }}">UF:</label>
+                            {{ form.uf }}
+                        </div>
+                
+                        <button type="submit" class="submit-btn">Cadastrar</button>
+                    </form>
+                </div>
             </div>
         </div>
         <script>
@@ -196,15 +362,18 @@
                 for (var i = 0; i < abas.length; i++) {
                     abas[i].style.display = "none";  // Esconde todas as abas ao carregar
                 }
+                document.getElementById("aba1").style.display = "block"; // Deixa a aba1 visível por padrão
             });
-        
+
             function toggleAba(abaId) {
                 var abas = document.getElementsByClassName("aba");
                 for (var i = 0; i < abas.length; i++) {
-                    abas[i].style.display = "none";
+                    abas[i].style.display = "none"; // Esconde todas as abas
                 }
-                document.getElementById(abaId).style.display = "block";
+                document.getElementById(abaId).style.display = "block"; // Exibe a aba selecionada
             }
+
+
         </script>        
         </section>
     </div>

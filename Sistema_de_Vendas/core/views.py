@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator  # Importando Paginator
 from core.models import Evento
+from core.models import Cliente
+from core.forms import ClienteForm
+from django import forms
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -42,10 +46,30 @@ def lista_eventos(request):
     dados = {'eventos': evento}
     return render(request, 'principal.html', dados)
 
-@login_required(login_url='/login/')
-def cad_clientes(request):
-    return render(request, 'clientes.html')
+#@login_required(login_url='/login/')
+#def cad_clientes(request):
+#    return render(request, 'clientes.html')
 
 @login_required(login_url= '/login/')
 def cad_produtos(request):
     return render(request, 'produtos.html')
+
+@login_required(login_url='/login/')
+def cad_clientes(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, "Cliente cadastrado com sucesso!")
+                return redirect('clientes')  # Redireciona para a lista de clientes
+            except IntegrityError:
+                messages.error(request, "Erro: CPF ou e-mail já cadastrado!")
+        else:
+            messages.error(request, "Erro ao cadastrar cliente. Verifique os dados.")
+
+    else:
+        form = ClienteForm()
+    
+    clientes = Cliente.objects.all()  # Buscar os clientes cadastrados
+    return render(request, 'clientes.html', {'clientes': clientes, 'form': form})
