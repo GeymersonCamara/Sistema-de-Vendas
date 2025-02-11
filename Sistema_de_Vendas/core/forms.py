@@ -1,8 +1,7 @@
 from django import forms
 from .models import Cliente
-
 from django import forms
-from .models import Cliente
+from .models import Product
 
 class ClienteForm(forms.ModelForm):
     class Meta:
@@ -20,4 +19,4 @@ class ClienteForm(forms.ModelForm):
             'numero': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Número'}),
             'bairro': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Bairro'}),
             'uf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'UF'}),
-        }
+        }  # Certifique-se de importar Produto

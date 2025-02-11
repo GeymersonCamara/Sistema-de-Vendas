@@ -6,8 +6,14 @@ from django.core.paginator import Paginator  # Importando Paginator
 from core.models import Evento
 from core.models import Cliente
 from core.forms import ClienteForm
+from core.models import Product
 from django import forms
 from django.db import IntegrityError
+from core.forms import ProductForm
+from django.contrib import messages
+from django.db import IntegrityError
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import path
 
 # Create your views here.
 
@@ -46,9 +52,6 @@ def lista_eventos(request):
     dados = {'eventos': evento}
     return render(request, 'principal.html', dados)
 
-#@login_required(login_url='/login/')
-#def cad_clientes(request):
-#    return render(request, 'clientes.html')
 
 @login_required(login_url= '/login/')
 def cad_produtos(request):

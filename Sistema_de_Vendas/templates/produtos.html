@@ -1,136 +1,47 @@
+product_list_html = """
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Produtos</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-        </style>
-    <style type="text/css">
-        /* Reset básico */
-        html, body {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            background-color: #f5f5f5;
-        }
-
-        nav {
-            background-color: #00336a;
-            height: 100px;
-            display: flex;
-            justify-content: space-evenly; /* Espaçamento igual */
-            align-items: center;           /* Centraliza verticalmente */
-            padding: 0;              /* Espaçamento interno horizontal */
-        }
-
-        .titulo {
-            color: white;
-            font-family: 'Titillium Web', sans-serif;
-            margin: 0;
-            flex: 1; /* Faz o título ocupar todo o espaço disponível */
-            text-align: left; /* Alinha o texto à esquerda */
-            padding: 0 2rem;
-        }
-
-        .button {
-            padding: 10px 20px;
-            margin: 0 2rem;
-            width: 6rem;
-            height: 2.6rem;
-            background-color: #18ada1;
-            color: white;
-            border: 2px solid transparent; /* Inicialmente, sem borda */
-            border-radius: 5px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 1.05rem;
-            cursor: pointer;
-            transition: border 0.3s ease; /* Suaviza a transição da borda */
-            
-            /* Centraliza o texto dentro do botão */
-            display: flex;
-            justify-content: center; /* Centraliza horizontalmente */
-            align-items: center;     /* Centraliza verticalmente */
-        }
-
-        .button:hover {
-            border-color: white; /* Cor da borda quando passar o mouse */
-        }
-
-        a {
-            text-decoration: none;
-            font-family: 'Titillium Web', sans-serif;
-            color: white;
-        }
-
-        .corpo {
-            display: flex;
-            margin-top: 5rem;
-        }
-
-        .categorias {
-            background-color: #00336a;
-            width: 22rem;
-            height: 40rem;
-            border-radius: 0.5rem;
-            margin: 0 0.5rem;
-            text-align: center; /* Garante que o texto interno fique centralizado */
-        }
-
-        .inicio {
-            background-color: white;
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-        }
-
-        .cad {
-            margin: 1rem auto;
-            padding: 0;
-            align-items: center;
-            text-align: center;
-            font-family: 'Titillium Web', sans-serif;
-            color: white;
-            font-size: 1.5rem;
-        }
-        .tres {
-            background: #004288;
-        }
-
-        .cabecalho {
-            font-family: 'Titillium Web', sans-serif;
-            color: #00336a;
-            font-size: 2rem;
-            align-items: center;
-            text-align: center;
-        }
-
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        .btn { padding: 5px 10px; text-decoration: none; margin-right: 5px; }
+        .edit { background-color: yellow; }
+        .delete { background-color: red; color: white; }
     </style>
 </head>
 <body>
-    <nav>
-        <h1 class="titulo"><a href="{% url 'principal' %}">Sistema</a></h1>
-        <button class="button" type="button"><a href="/logout">Logout</a></button>
-    </nav>
-    <div class="corpo">
-        <aside class="categorias">
-            <div class="um">
-                <a href="#" class="cad">Fornecedores</a>
-                <hr>
-            </div>
-            <div class="dois">
-                <a href="{% url 'clientes' %}" class="cad">Clientes</a>
-                <hr>
-            </div>
-            <div class="tres">
-                <a href="{% url 'produtos' %}" class="cad">Produtos</a>
-                <hr>
-            </div>
-        </aside>
-        <section class="inicio">
-            <h1 class="cabecalho">Cadastro de Produtos</h1>
-        </section>
-    </div>
+    <h1>Lista de Produtos</h1>
+    <a href="/new/" class="btn">Cadastrar Novo Produto</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Preço de Compra</th>
+            <th>Preço de Venda</th>
+            <th>Lucro</th>
+            <th>Ações</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.purchase_price }}</td>
+            <td>{{ product.sale_price }}</td>
+            <td>{{ product.profit }}</td>
+            <td>
+                <a href="/{{ product.id }}/edit/" class="btn edit">Editar</a>
+                <a href="/{{ product.id }}/delete/" class="btn delete">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
+"""

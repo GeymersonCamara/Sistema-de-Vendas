@@ -373,6 +373,21 @@
                 document.getElementById(abaId).style.display = "block"; // Exibe a aba selecionada
             }
 
+            function filtrarClientes() {
+                let input = document.getElementById("search").value.toLowerCase(); // Pega o valor da busca
+                let clientes = document.getElementsByClassName("cliente-item"); // Pega todos os clientes
+
+                for (let i = 0; i < clientes.length; i++) {
+                    let nome = clientes[i].getElementsByClassName("cliente-nome")[0].innerText.toLowerCase(); // Pega o nome do cliente
+                    if (nome.includes(input)) {
+                        clientes[i].style.display = ""; // Mostra o cliente
+                    } else {
+                        clientes[i].style.display = "none"; // Esconde se não corresponder à busca
+                    }
+                }
+            }
+
+
 
         </script>        
         </section>

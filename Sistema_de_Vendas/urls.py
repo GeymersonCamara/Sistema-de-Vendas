@@ -30,5 +30,4 @@ urlpatterns = [
     path('clientes/', views.cad_clientes, name='clientes'),
     path('produtos/', views.cad_produtos, name='produtos'),
     path('mercado/', views.pag_mercado, name='mercado'),
-    path('clientes/', views.lista_clientes, name='lista_clientes'),
 ]
